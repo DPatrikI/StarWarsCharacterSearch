@@ -7,17 +7,22 @@ interface SearchBarProps {
   setPage: (page: number) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, setPage }) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  searchTerm,
+  setSearchTerm,
+  setPage,
+}) => {
   const handleSearchTermChange = (text: string) => {
     setSearchTerm(text);
     setPage(1);
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
         style={styles.searchInput}
         placeholder="Search for a character!"
+        placeholderTextColor="#999999"
         value={searchTerm}
         onChangeText={handleSearchTermChange}
       />
@@ -28,11 +33,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, setPag
 export default SearchBar;
 
 const styles = StyleSheet.create({
-  searchInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+  container: {
     marginBottom: 10,
-    padding: 8,
+  },
+  searchInput: {
+    height: 50,
+    borderColor: '#FFD700',
+    borderWidth: 2,
+    borderRadius: 8,
+    padding: 10,
+    color: '#FFFFFF',
+    fontSize: 18,
+    backgroundColor: '#1a1a1a',
   },
 });

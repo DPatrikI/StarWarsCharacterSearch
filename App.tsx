@@ -108,7 +108,7 @@ const App = () => {
               loading={loading}
             />
           ) : (
-            !loading && <Text>No results found.</Text>
+            !loading && <Text style={styles.noResults}>No results found.</Text>
           )}
         </>
       )}
@@ -121,7 +121,14 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#000000',
     padding: 16,
-    marginTop: 50,
+    paddingTop: 50,
+  },
+  noResults: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    textAlign: 'center',
+    marginTop: 20,
   },
 });

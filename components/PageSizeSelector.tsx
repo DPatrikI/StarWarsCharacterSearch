@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface PageSizeSelectorProps {
   pageSize: number;
   setPageSize: (size: number) => void;
 }
 
-const PageSizeSelector: React.FC<PageSizeSelectorProps> = ({ pageSize, setPageSize }) => {
+const PageSizeSelector: React.FC<PageSizeSelectorProps> = ({
+  pageSize,
+  setPageSize,
+}) => {
   const sizes = [25, 50, 100, 150];
 
   return (
@@ -14,12 +17,23 @@ const PageSizeSelector: React.FC<PageSizeSelectorProps> = ({ pageSize, setPageSi
       <Text style={styles.label}>Page Size:</Text>
       <View style={styles.buttonsContainer}>
         {sizes.map((size) => (
-          <Button
+          <TouchableOpacity
             key={size}
-            title={size.toString()}
+            style={[
+              styles.button,
+              pageSize === size && styles.activeButton,
+            ]}
             onPress={() => setPageSize(size)}
-            color={pageSize === size ? 'blue' : 'gray'}
-          />
+          >
+            <Text
+              style={[
+                styles.buttonText,
+                pageSize === size && styles.activeButtonText,
+              ]}
+            >
+              {size}
+            </Text>
+          </TouchableOpacity>
         ))}
       </View>
     </View>
@@ -35,11 +49,32 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   label: {
+    color: '#FFFFFF',
     marginRight: 10,
+    fontSize: 16,
   },
   buttonsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '60%',
+  },
+  button: {
+    borderColor: '#FFFFFF',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    marginRight: 5,
+    backgroundColor: '#1a1a1a',
+  },
+  activeButton: {
+    backgroundColor: '#FFD700',
+    borderColor: '#FFD700',
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+  },
+  activeButtonText: {
+    color: '#000000',
+    fontWeight: 'bold',
   },
 });

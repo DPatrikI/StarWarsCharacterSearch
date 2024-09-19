@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface PaginationControlsProps {
   page: number;
@@ -28,19 +28,29 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
 
   return (
     <View style={styles.container}>
-      <Button
-        title="Previous"
+      <TouchableOpacity
         onPress={handlePrevious}
         disabled={page === 1 || loading}
-      />
-      <Text>
+        style={[
+          styles.button,
+          (page === 1 || loading) && styles.disabledButton,
+        ]}
+      >
+        <Text style={styles.buttonText}>Previous</Text>
+      </TouchableOpacity>
+      <Text style={styles.pageInfo}>
         Page {page} of {totalPages}
       </Text>
-      <Button
-        title="Next"
+      <TouchableOpacity
         onPress={handleNext}
         disabled={loading || page === totalPages}
-      />
+        style={[
+          styles.button,
+          (loading || page === totalPages) && styles.disabledButton,
+        ]}
+      >
+        <Text style={styles.buttonText}>Next</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -53,5 +63,24 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 10,
+  },
+  button: {
+    borderColor: '#FFFFFF',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: '#1a1a1a',
+  },
+  disabledButton: {
+    borderColor: '#555555',
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+  },
+  pageInfo: {
+    color: '#FFFFFF',
+    fontSize: 16,
   },
 });
