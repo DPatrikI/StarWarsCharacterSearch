@@ -44,4 +44,4 @@ Steps
 Running Tests
 
 The application includes unit tests for core components and functionality.
-  npm test
+npm test
